@@ -1,9 +1,10 @@
 import React from 'react'
+import LoginCompo from '../components/LoginCompo';
 
 function Login() {
     return (
         <div>
-            Login
+            <LoginCompo/>
         </div>
     )
 }

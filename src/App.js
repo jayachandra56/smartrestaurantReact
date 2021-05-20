@@ -8,23 +8,27 @@ import Dashboard from './pages/Dashboard'
 import CheckOut from './pages/CheckOut'
 import Cart from './pages/Cart'
 import PageNotFound from './pages/PageNotFound';
+import { Provider } from 'react-redux'
+import { store } from './redux/store';
 
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Switch>
-          <Route exact path='/' component={Login} />
-          <Route exact path='/login' component={Login} />
-          <Route exact path='/register' component={Register} />
-          <Route exact path='/dashboard' component={Dashboard} />
-          <Route exact path='/orders' component={MyOrders} />
-          <Route exact path='/itemslist' component={ItemsList} />
-          <Route exact path='/checkout' component={CheckOut} />
-          <Route exact path='/cart' component={Cart} />
-          <Route exact component={PageNotFound} />
-        </Switch>
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <Switch>
+            <Route exact path='/' component={Login} />
+            <Route exact path='/login' component={Login} />
+            <Route exact path='/register' component={Register} />
+            <Route exact path='/dashboard' component={Dashboard} />
+            <Route exact path='/orders' component={MyOrders} />
+            <Route exact path='/itemslist' component={ItemsList} />
+            <Route exact path='/checkout' component={CheckOut} />
+            <Route exact path='/cart' component={Cart} />
+            <Route exact component={PageNotFound} />
+          </Switch>
+        </Router>
+      </Provider>
     </div>
   );
 }
