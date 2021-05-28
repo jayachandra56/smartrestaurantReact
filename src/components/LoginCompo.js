@@ -28,7 +28,7 @@ function LoginCompo(props) {
     return (
         <div className="container-fluid login-main">
             <div className="sub-container">
-                <div className="login-container rounded-circle">
+                <div className="login-container ">
                     <h1 className="text-center">Login</h1>
                     <form>
                         <div className="form-group text-left">
@@ -39,11 +39,13 @@ function LoginCompo(props) {
                         <div className="form-group text-left">
                             <label >Password</label>
                             <input type="password" value={password} onChange={e=>setpassword(e.target.value)} className="form-control" id="exampleInputPassword1" placeholder="Password" />
+                            <span className="text-center text-danger"><small>{props.error}</small></span>
                         </div>
-                        <span className="text-center">{props.error}</span>
+                        
                         <button type='button' onClick={props.userAuthStart} className="btn btn-primary text-center">{props.isLoading?'Fetching..':'Submit'}</button>
                     </form>
-                    <span className="text-center">Not Registered yet?&nbsp;&nbsp;<b className="hoverText">Register</b></span>
+                    <br/><br/>
+                    <span className="text-center">Not Registered yet?&nbsp;&nbsp;<small className="hoverText text-primary">Register Now</small></span>
                 </div>
 
             </div>
@@ -53,11 +55,11 @@ function LoginCompo(props) {
 
 const mapStateToProps=(state)=>{
     return{
-        userName:state.userName,
-        userNumber:state.userNumber,
-        isLogged:state.isLogged,
-        isLoading:state.isLoading,
-        error:state.error
+        userName:state.user.userName,
+        userNumber:state.user.userNumber,
+        isLogged:state.user.isLogged,
+        isLoading:state.user.isLoading,
+        error:state.user.error
     }
 }
 

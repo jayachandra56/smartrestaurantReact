@@ -27,7 +27,7 @@ export const userAuth=(number,password)=>{
             method:'POST',
             body:data
         })
-        .then(response=>response.json().then(
+        .then(response=>response.json()).then(
             res=>{
                 console.log(res)
                 if(res.login){
@@ -37,7 +37,7 @@ export const userAuth=(number,password)=>{
                 }
             }
             )
-        )
+        // )
         .catch(error=>{
             dispatch(userAuthFailed(error))
         })

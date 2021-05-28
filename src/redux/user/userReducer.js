@@ -18,7 +18,6 @@ export const userReducer = (state = initialUserState, action) => {
             }
         }
         case USER_AUTH_SUCCESS: {
-            console.log(action.payload.name)
             return {
                 ...state,
                 userNumber: action.payload.number,
@@ -48,4 +47,4 @@ export const userReducer = (state = initialUserState, action) => {
     }
 }
 
-export default userReducer
+// export default userReducer

@@ -1,5 +1,12 @@
-import {createStore,applyMiddleware} from 'redux'
+import {createStore,applyMiddleware,combineReducers} from 'redux'
 import thunk from 'redux-thunk'
-import userReducer from './user/userReducer'
+import {userReducer} from './user/userReducer'
+import {cartReducer} from './cart/cartReducer'
 
-export const store=createStore(userReducer,applyMiddleware(thunk))
+const multipleReducers={
+    user:userReducer,
+    cart:cartReducer
+}
+
+const combineReducer=combineReducers(multipleReducers)
+export const store=createStore(combineReducer,applyMiddleware(thunk))
