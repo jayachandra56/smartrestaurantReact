@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import { connect } from 'react-redux';
 import { addItemToCart } from '../redux/cart/cartActions';
+import CardForListItem from './CardForListItem';
 
 let itemObj={id:'cv',name:'',price:'',quantity:''};
 function ItemsListCompo(props) {
@@ -38,13 +39,21 @@ function ItemsListCompo(props) {
     }
     return (
         <div>
-            
-            <ul>
+            <div class="container list-item-container">
+                <div class="cart-item card-head">
+                    <span class="name">Item Name</span>
+                    <span class="price">Item Price</span>
+                    <span class="qty">Qty</span>
+                    <span class="action-btn"></span>
+                </div>
+            </div>
+            {itemsList.map(itemd=><CardForListItem key={itemd.id} listItemDetails={itemd}/>)}
+            {/* <ul>
             {itemsList.map(itemd=><li key={itemd.id}>{itemd.name}{itemd.price}
             <input type="number" onChange={e=>setqty(e.target.value)}/>
             <button onClick={e=>HandleAddTOCart({id:itemd.id,name:itemd.name,price:itemd.price,quantity:qty})}>Add Item</button>
             </li>)}
-            </ul>
+            </ul> */}
         </div>
     )
 }
