@@ -1,4 +1,4 @@
-import { ADD_ITEM, MODIFY_ITEM, REMOVE_ITEM } from "../constants";
+import { ADD_ITEM, CLEAR_CART, MODIFY_ITEM, REMOVE_ITEM } from "../constants";
 
 
 export const addItemToCart=(item)=>{
@@ -20,5 +20,10 @@ export const modifyItemInCart=(item)=>{
     return {
         type:MODIFY_ITEM,
         payload:item
+    }
+}
+export const clearCart=()=>{
+    return {
+        type:CLEAR_CART
     }
 }

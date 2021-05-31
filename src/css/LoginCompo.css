@@ -13,7 +13,14 @@
     padding: 0px !important;
 }
 .sub-container{
-    background-color: rgba(32, 28, 28, 0.79);
+    /* background-color: rgba(32, 28, 28, 0.79); */
+    background-image: linear-gradient(
+      to left,
+      rgba(40, 157, 252, 0.500),
+      rgba(1, 252, 106, 0.5),
+      rgba(31, 132, 248, 0.500),
+      rgba(1, 252, 106, 0.5)
+   );
     height: 100vh;
     width: 100%;
     margin: 0px;

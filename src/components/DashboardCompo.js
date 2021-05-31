@@ -25,7 +25,7 @@ function DashboardCompo(props) {
     },[])
 
     return (
-        <div class="container-fluid">
+        <div class="container-fluid px-0">
             <div className="container-fluid items-container">
             {items.map(item=>
             <CardCompoMenuItem key={item.id} itemDetails={item}/>)}

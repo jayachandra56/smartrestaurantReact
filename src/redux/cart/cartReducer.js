@@ -1,4 +1,4 @@
-import { ADD_ITEM, REMOVE_ITEM } from "../constants"
+import { ADD_ITEM, CLEAR_CART, REMOVE_ITEM } from "../constants"
 
 const initialState={
     cartItems:[]
@@ -20,6 +20,11 @@ export const cartReducer=(state=initialState,action)=>{
         case REMOVE_ITEM:{
             return{
                 cartItems:state.cartItems.filter(item=> item.id!==action.payload)
+            }
+        }
+        case CLEAR_CART:{
+            return{
+                cartItems:[]
             }
         }
         default: return state;

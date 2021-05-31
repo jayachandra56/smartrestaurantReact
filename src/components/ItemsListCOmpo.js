@@ -2,13 +2,13 @@ import React,{useState,useEffect} from 'react'
 import { connect } from 'react-redux';
 import { addItemToCart } from '../redux/cart/cartActions';
 import CardForListItem from './CardForListItem';
+import {withRouter} from 'react-router-dom'
 
 let itemObj={id:'cv',name:'',price:'',quantity:''};
 function ItemsListCompo(props) {
     const [itemsList, setitemslist] = useState([])
     const [qty, setqty] = useState(1)
     
-    console.log("cart items==="+props.cartItems)
     useEffect(()=>{
         let data=new FormData();
         data.append('category',props.category);
@@ -37,9 +37,14 @@ function ItemsListCompo(props) {
         props.AddTOCart()
 
     }
+
+    const GoMainMenu=()=>{
+        props.history.push('/dashboard')
+    }
     return (
         <div>
-            <div class="container list-item-container">
+            <div class="container list-item-container"><br/>
+            <button className="btn btn-dark" onClick={GoMainMenu}>Main Menu</button><br/><br/>
                 <div class="cart-item card-head">
                     <span class="name">Item Name</span>
                     <span class="price">Item Price</span>
@@ -71,4 +76,4 @@ const mapDispatchToProps=(dispatch)=>{
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(ItemsListCompo)
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(ItemsListCompo))

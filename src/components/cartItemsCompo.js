@@ -1,20 +1,49 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { removeItemFromCart } from '../redux/cart/cartActions'
+import { connect,useSelector} from 'react-redux'
+import {withRouter} from 'react-router-dom'
+import { clearCart, removeItemFromCart } from '../redux/cart/cartActions'
 import CardForCartItem from './CardForCartItem'
 import CardForListItem from './CardForListItem'
 
 let itemID = ''
-function cartItemsCompo(props) {
+function CartItemsCompo(props) {
+    const userNumber = useSelector(state => state.user.userNumber)
     //console.log(props.cartItems[0].id)
     // const itemsList=props.cartItems
     const RemoveItem = (id) => {
         itemID = id
         props.DeleteItem()
     }
+
+    const GoMainMenu=()=>{
+        props.history.push('/dashboard')
+    }
+
+    const PlaceOrder=()=>{
+        
+        let data=new FormData();
+        data.append('data',JSON.stringify(props.cartItems));
+        data.append('username',userNumber)
+        fetch('http://chandra.getenjoyment.net/reactSmartRes/placeOrder.php',{
+            method:'POST',
+            body:data
+        })
+        .then(response=>response.json())
+        .then(res=>{
+            console.log(res)
+            if(res.status){
+                console.log("placed")
+                props.clearCart()
+            }else{
+                console.log('failed')
+            }
+        })
+        .catch(error=>console.log(error))
+    }
     return (
         <div>
-            <div class="container list-item-container">
+            <div class="container list-item-container"><br/>
+            <button className="btn btn-dark" onClick={GoMainMenu}>Main Menu</button><br/><br/>
                 <div class="cart-item card-head">
                     <span class="name">Item Name</span>
                     <span class="price">Item Price</span>
@@ -25,13 +54,10 @@ function cartItemsCompo(props) {
             {props.cartItems.length > 0 ?
                 props.cartItems.map(item => <CardForCartItem key={item.id} listItemDetails={item} delItem={RemoveItem} />)
 
-                : "No Items Added"}
-            {/* <ul>
-            {props.cartItems.map(item=><li key={item.id}>{item.itemName}&nbsp;&nbsp;{item.itemQty}
-                &nbsp;&nbsp;
-                <button className="btn" onClick={()=>RemoveItem(item.id)}>RemoveItem</button>
-                </li>)}
-            </ul> */}
+                : "Cart Is Empty"}
+            <div>
+            <br/><br/><button className="btn btn-dark" onClick={PlaceOrder}>Place Order</button><br/><br/>
+            </div>
         </div>
     )
 }
@@ -46,9 +72,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        DeleteItem: () => dispatch(removeItemFromCart(itemID))
+        DeleteItem: () => dispatch(removeItemFromCart(itemID)),
+        clearCart:()=>dispatch(clearCart())
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(cartItemsCompo)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CartItemsCompo))
 
