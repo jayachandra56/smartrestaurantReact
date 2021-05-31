@@ -1,13 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {withRouter} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import {useSelector} from 'react-redux'
+import {useSelector,useDispatch} from 'react-redux'
+import { USER_LOGOUT } from '../redux/constants';
     
 
 function Header(props) {
     // const cartCount=
     const itemsCount = useSelector(state => state.cart.cartItems)
+    const userState = useSelector(state => state.user)
+    const dispatch = useDispatch()
+    
+    useEffect(()=>{
+        if(!userState.isLogged){
+            props.history.push('/')
+        }
+    },[userState])
     const GoToCart=()=>{
         props.history.push('/cart')
     }
@@ -28,7 +37,7 @@ function Header(props) {
                 <div class="header-options">
                     <div className=" btn bg-primary text-white mx-4" onClick={GoToCart}><span className="bg-primary mx-1">Cart - </span><span className="count">{itemsCount.length}</span></div>
                     <button className="btn btn-primary mx-4" onClick={GoToMyOrders}>My Orders</button>
-                    <button className="btn btn-primary mx-4">Logout</button>
+                    <button className="btn btn-primary mx-4" onClick={()=>dispatch({type:USER_LOGOUT})}>Logout</button>
                 </div>
             </div>
         </div>

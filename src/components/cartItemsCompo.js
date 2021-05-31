@@ -64,7 +64,6 @@ function CartItemsCompo(props) {
 
 
 const mapStateToProps = (state) => {
-    console.log("propsss")
     return {
         cartItems: state.cart.cartItems
     }

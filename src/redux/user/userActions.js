@@ -1,19 +1,19 @@
 import { connect } from "react-redux"
 import { USER_AUTH, USER_AUTH_FAILED, USER_AUTH_SUCCESS, USER_LOGOUT } from "../constants"
 
-const userAuthSuccess=(user)=>{
+export const userAuthSuccess=(user)=>{
     return {type:USER_AUTH_SUCCESS,payload:user}
 }
 
-const userAuthStart=()=>{
+export const userAuthStart=()=>{
     return {type:USER_AUTH}
 }
 
-const userAuthFailed=(error)=>{
+export const userAuthFailed=(error)=>{
     return {type:USER_AUTH_FAILED,payload:error}
 }
 
-const userAuthLogout=()=>{
+export const userAuthLogout=()=>{
     return {type:USER_LOGOUT}
 }
 
