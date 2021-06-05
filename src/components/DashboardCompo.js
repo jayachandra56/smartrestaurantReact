@@ -1,11 +1,13 @@
 import React,{useEffect,useState} from 'react'
 import {withRouter} from 'react-router-dom'
+import {useSelector,useDispatch} from 'react-redux'
 import CardCompoMenuItem from './cardCompoMenuItem';
 
 let menu=[];
 
 
 function DashboardCompo(props) {
+    const orderCount = useSelector(state => state.orders.MyOrdersList)
     const [items, setitems] = useState([])
     
     useEffect(()=>{
@@ -30,9 +32,6 @@ function DashboardCompo(props) {
             {items.map(item=>
             <CardCompoMenuItem key={item.id} itemDetails={item}/>)}
             </div>
-            {/* <ul>
-            {items.map(item=><li key={item.id} onClick={()=>{props.history.push('/itemslist',{userId:item.id})}}>{item.name}</li>)}
-            </ul> */}
         </div>
     )
 }
